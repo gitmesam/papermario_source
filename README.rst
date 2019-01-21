@@ -10,7 +10,7 @@ used gcc 2.8.1 and binutils 2.9.1 to compile ROMs for the
 Nintendo 64, with some custom patches.
 
 The patches from the FTP are reproduced here exactly, and
-they can be applied using the Linux ``gunzip`` and``patch``
+they can be applied using the Linux ``gunzip`` and ``patch``
 tools.
 
 As these compilers are very dated, changes in C standards
