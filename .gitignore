@@ -1,0 +1,7 @@
+
+
+# Ignore IDEs and editors
+.code/
+.idea/
+.vs/
+.vscode/

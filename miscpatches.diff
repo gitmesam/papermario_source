@@ -1,0 +1,41 @@
+diff -crN gcc-2.8.1/c-gperf.h gcc-2.8.1-patched/c-gperf.h
+*** gcc-2.8.1/c-gperf.h	Sun Feb 15 01:11:03 1998
+--- gcc-2.8.1-patched/c-gperf.h	Mon Jan 21 16:14:42 2019
+***************
+*** 165,171 ****
+  #ifdef __GNUC__
+  inline
+  #endif
+! struct resword *
+  is_reserved_word (str, len)
+       register char *str;
+       register unsigned int len;
+--- 165,171 ----
+  #ifdef __GNUC__
+  inline
+  #endif
+! static struct resword *
+  is_reserved_word (str, len)
+       register char *str;
+       register unsigned int len;
+diff -crN gcc-2.8.1/obstack.h gcc-2.8.1-patched/obstack.h
+*** gcc-2.8.1/obstack.h	Fri Feb 20 13:21:47 1998
+--- gcc-2.8.1-patched/obstack.h	Mon Jan 21 16:14:22 2019
+***************
+*** 418,424 ****
+  ({ struct obstack *__o = (OBSTACK);					\
+     if (__o->next_free + sizeof (void *) > __o->chunk_limit)		\
+       _obstack_newchunk (__o, sizeof (void *));				\
+!    *((void **)__o->next_free)++ = ((void *)datum);			\
+     (void) 0; })
+  
+  # define obstack_int_grow(OBSTACK,datum)				\
+--- 418,425 ----
+  ({ struct obstack *__o = (OBSTACK);					\
+     if (__o->next_free + sizeof (void *) > __o->chunk_limit)		\
+       _obstack_newchunk (__o, sizeof (void *));				\
+!    *((void **)__o->next_free) = ((void *)datum);			\
+!    __o->next_free += sizeof (void *);                                   \
+     (void) 0; })
+  
+  # define obstack_int_grow(OBSTACK,datum)				\
